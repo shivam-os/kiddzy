@@ -1,6 +1,7 @@
 const {body} = require("express-validator");
 
-exports.create = [
+//Validator for checking values while creation or updation of a kid
+exports.createKid = [
   body("name")
     .trim()
     .not()
@@ -15,16 +16,17 @@ exports.create = [
       "Name field cannot contain any numbers or special characters!"
     ),
 
-  body("email")
+  body("username")
     .trim()
     .not()
     .isEmpty()
-    .withMessage("Email field cannot be empty!")
-    .normalizeEmail()
-    .isEmail()
-    .withMessage("Invalid email address!"),
+    .withMessage("Username field cannot be empty!")
+    .isLength({ min: 3, max: 20 })
+    .withMessage("Usename field must contain minimum 3 letters and maxmimum 20 letters!")
+    .isAlphanumeric()
+    .withMessage("Username field can only contain alphabets & numbers!"),
 
-  body("password")
+  body("age")
     .trim()
     .not()
     .isEmpty()

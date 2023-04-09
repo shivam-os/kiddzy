@@ -11,7 +11,9 @@ const rewardRoutes = require("./routes/rewardRoutes");
 const PORT = 3005;
 
 //Default middlewares
-app.use(cors());
+app.use(cors({
+  origin: '*'
+}));
 app.use(morgan("dev"));
 app.use(express.json());
 

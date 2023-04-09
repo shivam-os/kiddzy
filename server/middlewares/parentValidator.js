@@ -1,5 +1,6 @@
 const { body } = require("express-validator");
 
+//Validator for checking register values
 exports.register = [
   body("name")
     .trim()
@@ -33,4 +34,22 @@ exports.register = [
     .withMessage(
       "Password must be atleast 8 characters long & must include- one uppercase letter, one lowercase letter, one special character, one digit!"
     ),
+];
+
+//Validator for checking login values
+exports.login = [
+  body("email")
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("Email field cannot be empty!")
+    .normalizeEmail()
+    .isEmail()
+    .withMessage("Invalid email address!"),
+
+  body("password")
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("Password field cannot be empty!"),
 ];
